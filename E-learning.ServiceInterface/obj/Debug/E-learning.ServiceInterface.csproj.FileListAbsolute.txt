@@ -1,0 +1,16 @@
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\E-learning.ServiceInterface.dll
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\E-learning.ServiceInterface.pdb
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\E-learning.DomainModels.dll
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\EntityFramework.dll
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\E-learning.DomainModels.pdb
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\E-learning.DomainModels.dll.config
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\bin\Debug\EntityFramework.xml
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\obj\Debug\E-learning.ServiceInterface.csprojAssemblyReference.cache
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\obj\Debug\E-learning.ServiceInterface.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\obj\Debug\E-learning.ServiceInterface.csproj.CopyComplete
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\obj\Debug\E-learning.ServiceInterface.dll
+C:\Users\user\source\repos\E-learning\E-learning.ServiceInterface\obj\Debug\E-learning.ServiceInterface.pdb

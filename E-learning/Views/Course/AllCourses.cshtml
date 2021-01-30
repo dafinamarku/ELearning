@@ -1,0 +1,21 @@
+﻿@model IEnumerable<E_learning.DomainModels.Kurs>
+@{
+    ViewBag.Title = "AllCourses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+  <br />
+  <h2>Kurset</h2>
+  <br />
+  <table class="table table-hover">
+    @foreach(var course in Model)
+    {
+      <tr>
+        <th class="text-center" style="font-size:x-large">
+        @Html.ActionLink(course.Emri, "CourseLevels", "Course", new { id = course.KursId }, null)</th>
+      </tr>
+    }
+  </table>
+</div>
+
+

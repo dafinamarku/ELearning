@@ -1,0 +1,15 @@
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\E-learning.DomainModels.dll.config
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\E-learning.DomainModels.dll
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\E-learning.DomainModels.pdb
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\EntityFramework.dll
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\EntityFramework.xml
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\obj\Debug\E-learning.DomainModels.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\obj\Debug\E-learning.DomainModels.csproj.CopyComplete
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\obj\Debug\E-learning.DomainModels.dll
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\obj\Debug\E-learning.DomainModels.pdb

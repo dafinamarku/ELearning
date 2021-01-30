@@ -1,0 +1,93 @@
+﻿
+@model IEnumerable<E_learning.DomainModels.Material>
+@{
+    ViewBag.Title = "MaterialsOfSection";
+}
+
+<div class="container">
+  <br />
+  @Html.Partial("_Notifications")
+  <br />
+  <h5>@Html.ActionLink(ViewBag.Kursi as String, "AllCourses", "Course", null, null)>@Html.ActionLink(ViewBag.Niveli as String, "CourseLevels", "Course", new { id = ViewBag.KursId }, null)>@Html.ActionLink(ViewBag.Tipi as String, "CourseLevelTypes", "Course", new { courseId = ViewBag.KursId, levelId = ViewBag.NivelId }, null)</h5>
+  <hr />
+  <br />
+  <h2 class="text-center">Materialet</h2>
+  <br />
+  <a href="/Material/AddMaterialInSection/@ViewBag.SeksionId" class="btn btn-outline-success  btn-lg btn-block">Shto Material <i class="far fa-file-alt"></i></a>
+  <br />
+  @if (Model == null || Model.Count() == 0)
+  {
+    <p class="text-center">Ky kurs nuk ka asnje material.</p>
+  }
+  <div class="row">
+
+    @if (ViewBag.Tipi == "Video")
+    {
+      foreach (var material in Model)
+      {
+
+        <div class="card" style="margin-top:20px; margin-bottom:20px; border: groove">
+          <div class="card-body">
+            <video controls>
+              <source src="@MaterialPaths.VideosPath@System.Uri.EscapeUriString(material.Filename)" type="video/@System.IO.Path.GetExtension(material.Filename).ToLower().Substring(1)">
+            </video>
+            <h4 class="card-title">@material.Titulli</h4>
+            <p class="card-text" style="overflow: auto; height: 70px;">@material.Pershkrimi</p>
+            <div class="float-right">
+              <a href="#" data-toggle="tooltip" title="Edito" class="card-link"><i class="far fa-edit"></i></a>
+              <a href="#" data-toggle="tooltip" title="Fshi" class="card-link"><i class="far fa-trash-alt"></i></a>
+            </div>
+          </div>
+        </div>
+      }
+    }
+    else
+    {
+      if (ViewBag.Tipi == "Audio")
+      {
+        foreach (var material in Model)
+        {
+
+          <div class="col-md-4">
+            <div class="card" style="margin-top:20px; margin-bottom:20px; border: groove">
+              <div class="card-body">
+                <audio controls="controls">
+                  <source src="@MaterialPaths.AudioPath@System.Uri.EscapeUriString(material.Filename)" type="audio/@System.IO.Path.GetExtension(material.Filename).ToLower().Substring(1)">
+                </audio>
+                <h4 class="card-title ">@material.Titulli</h4>
+                <p class="card-text " style="overflow: auto; height: 70px;">@material.Pershkrimi</p>
+                <div class="float-right">
+                  <a href="/Material/EditMaterial/@material.Id" data-toggle="tooltip" title="Edito" class="card-link"><i class="far fa-edit"></i></a>
+                  <a href="#" data-toggle="tooltip" title="Fshi" class="card-link"><i class="far fa-trash-alt"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        }
+      }
+      else //Text
+      {
+        <table class="table table-hover">
+          <tr>
+            <th>@Html.DisplayNameFor(x => x.Titulli)</th>
+            <th>@Html.DisplayNameFor(x => x.Pershkrimi)</th>
+            <th>Dokumenti</th>
+          </tr>
+          @foreach (var material in Model)
+          {
+            <tr>
+              <td>@Html.DisplayFor(x => material.Titulli)></td>
+              <td>@Html.DisplayFor(x => material.Pershkrimi)</td>
+              <td><a href="@MaterialPaths.TextPath@material.Filename" target="_blank">@Html.DisplayFor(x => material.Filename)</a></td>
+            </tr>
+          }
+        </table>
+
+      }
+    }
+  </div>
+
+
+</div>
+

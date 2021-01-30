@@ -1,0 +1,16 @@
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\E-learning.RepositoryInterface.dll
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\E-learning.RepositoryInterface.pdb
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\E-learning.DomainModels.dll
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\EntityFramework.dll
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\E-learning.DomainModels.pdb
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\E-learning.DomainModels.dll.config
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\bin\Debug\EntityFramework.xml
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\obj\Debug\E-learning.RepositoryInterface.csprojAssemblyReference.cache
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\obj\Debug\E-learning.RepositoryInterface.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\obj\Debug\E-learning.RepositoryInterface.csproj.CopyComplete
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\obj\Debug\E-learning.RepositoryInterface.dll
+C:\Users\user\source\repos\E-learning\E-learning.RepositoryInterface\obj\Debug\E-learning.RepositoryInterface.pdb

@@ -1,0 +1,47 @@
+﻿@model E_learning.DomainModels.Material
+@{
+    ViewBag.Title = "EditMaterial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+  <br />
+  <h5>@Html.ActionLink(ViewBag.Kursi as String, "AllCourses", "Course", null, null)>@Html.ActionLink(ViewBag.Niveli as String, "CourseLevels", "Course", new { id = ViewBag.KursId }, null)>@Html.ActionLink(ViewBag.Tipi as String, "CourseLevelTypes", "Course", new { courseId = ViewBag.KursId, levelId = ViewBag.NivelId }, null)</h5>
+  <hr />
+  <br />
+  <h2>Edito</h2>
+  <br />
+  @using (Html.BeginForm("EditMaterial", "Material", FormMethod.Post, new { enctype = "multipart/form-data" }))
+  {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=>x.SeksioniId)
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        @Html.LabelFor(x => x.Titulli)
+        @Html.TextBoxFor(x => x.Titulli, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Titulli, null, new { @class = "text-danger" })
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label>Materiali</label>
+        <input class="form-control" type="file" class="file-input" id="file" name="file" value="@Model.Filename">
+        <small class="form-text text-muted">Nqs ju nuk perzgjidhni nje file atehere file ekzistues nuk do te ndryshoje.</small>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        @Html.LabelFor(x => x.Pershkrimi)
+        @Html.TextAreaFor(x => x.Pershkrimi, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Pershkrimi, null, new { @class = "text-danger" })
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Ruaj" class="btn  btn-warning text-white" /> &nbsp; &nbsp;
+        @Html.ActionLink("Anullo", "MaterialsOfSection", "Material", new { id = Model.SeksioniId }, new { @class = "btn btn-primary" })
+      </div>
+    </div>
+  }
+</div>
+

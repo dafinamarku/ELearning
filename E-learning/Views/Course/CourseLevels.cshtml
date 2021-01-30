@@ -1,0 +1,19 @@
+﻿@model Dictionary<int, string>
+@{
+    ViewBag.Title = "CourseLevels";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+  <br />
+  <h5>@Html.ActionLink("< Kurset", "AllCourses", "Course")</h5>
+  <hr />
+  <br />
+  <h2 class="text-center">@ViewBag.Kursi</h2>
+  <br /><br />
+    @foreach(var level in Model)
+    {
+        @Html.ActionLink(level.Value, "CourseLevelTypes", "Course", new { @courseId=ViewBag.KursId, @levelId=level.Key }, new { @class= "btn btn-dark btn-lg btn-block" })
+    }
+</div>
+
+
