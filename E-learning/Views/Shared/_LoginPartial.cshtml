@@ -1,12 +1,13 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-  using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+  using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
   {
     @Html.AntiForgeryToken()
 
-    @*<ul class="navbar-nav">
-      @if (!User.IsInRole("Admin"))
+    <ul class="navbar-nav">
+     
+      @*@if (!User.IsInRole("Admin"))
       {
         <li class="nav-item">
           @Html.ActionLink("Profili im", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
@@ -20,10 +21,10 @@
         <li class="nav-item">
           @Html.ActionLink("Menaxho Kategorite", "Index", "Kategorias", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
         </li>
-      }
+      }*@
 
-      <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>*@
+      <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+    </ul>
   }
 }
 else

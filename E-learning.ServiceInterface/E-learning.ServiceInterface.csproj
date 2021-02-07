@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICommentsService.cs" />
     <Compile Include="ICourseService.cs" />
     <Compile Include="ILevelService.cs" />
     <Compile Include="IMaterialService.cs" />
     <Compile Include="ISectionService.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

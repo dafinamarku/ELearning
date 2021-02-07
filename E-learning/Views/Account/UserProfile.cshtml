@@ -1,0 +1,63 @@
+﻿@model E_learning.DomainModels.ApplicationUser
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <br />
+  @Html.Partial("_Notifications")
+  <h2 class="text-center">Profili im</h2>
+  <div class="well">
+    <hr />
+    <div class="row">
+      <div class="col-md-3">
+        @if (!string.IsNullOrEmpty(Model.Photo))
+        {
+          <img src="@MaterialPaths.ProfileImagesPath@Model.Photo" alt="No Image" style="height:200px;" class="img-responsive img-circle" />
+        }
+        else
+        {
+          <img src="@Url.Content("~/Profile Images/WF.jpg")" alt="No Image" style="height:200px" class="img-responsive img-circle" />
+        }
+      </div>
+      <div class="col-md-5">
+        <h4>@Model.Emri @Model.Mbiemri</h4> <br />
+        <dl class="dl-horizontal">
+          <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+          </dt>
+          <dd>
+            @Html.DisplayFor(model => model.UserName)
+          </dd>
+          <dt>
+            @Html.DisplayNameFor(model => model.Email)
+          </dt>
+          <dd>
+            @Html.DisplayFor(model => model.Email)
+          </dd>
+        </dl>
+      </div>
+      <div class="col-md-4">
+        @Html.ActionLink("Ndrysho Password-in", "ChangePassword", "Account", null, new { @class = "btn btn-outline-dark " })
+      </div>
+    </div>
+
+    <dl>
+      <dt></dt>
+      <dd style="margin-top:20px">
+        <br />
+        <div class="col-md-5">
+          @using (Html.BeginForm("UpdatePicture", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+          {
+            <input type="file" class="file-input form-control-file" id="file" name="file" value="@Model.Photo" required><br /><br />
+            <input type="submit" value="Ndrysho Foton" class="btn btn-outline-dark" />
+            <p class="text-danger">@ViewBag.Photo</p>
+          }
+        </div>
+        <br />
+      </dd>
+    </dl>
+  </div>
+</div>
+

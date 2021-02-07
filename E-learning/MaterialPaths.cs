@@ -10,5 +10,7 @@ namespace E_learning
     public const string VideosPath = "/Content/Materials/Video/";
     public const string TextPath = "/Content/Materials/Text/";
     public const string AudioPath = "/Content/Materials/Audio/";
+    public const string ProfileImagesPath = "/Content/ProfileImages/";
+    public const string CoursePhotoPath = "/Content/CourseImages/";
   }
 }

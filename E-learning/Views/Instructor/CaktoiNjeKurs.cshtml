@@ -1,0 +1,31 @@
+﻿@model E_learning.DomainModels.Kurs
+@{
+    ViewBag.Title = "Caktoi Nje Kurs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <br />
+  <h2 class="text-center">Perzgjidhni nje kurs</h2>
+  <hr />
+  <br />
+  <p class="text-center text-info">Ne qofte se perzgjidhni opsionin <b>'Nuk drejton asnje kurs ---'</b>,<br /> instruktori i perzgjedhur do te hiqet nga kursi qe drejton (nqs ka nje te tille).</p>
+  <br />
+  @using (Html.BeginForm("CaktoiNjeKurs", "Instructor", new { @id= ViewBag.InstructorId }, FormMethod.Post, null))
+  {
+    <div class="row">
+      <div class="col" style=" left: 35%; transform: translateX(-35 %)">
+        <label class="text-center font-weight-bold">Kurset e disponueshme</label>
+        @Html.DropDownListFor(x=>x.KursId,(SelectList)ViewBag.KursetEDisponueshme,
+            "Nuk drejton asnje kurs ---", htmlAttributes: new { @class = "form-control", style = "width: 300px;" })
+        <br />
+      </div>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-light btn-outline-dark">Ruaj</button> &nbsp;&nbsp;
+      <a href="/Instructor/AllInstructors" class="btn btn-secondary">Anulo</a>
+    </div>
+  }
+
+</div>
+

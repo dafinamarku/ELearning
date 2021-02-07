@@ -12,5 +12,9 @@ namespace E_learning.RepositoryInterface
     Kurs GetCourseById(int id);
     List<Kurs> GetAllCourses();
     List<KursNivelTip> GetCourseSections(int id);
+    bool CreateCourse(Kurs k);
+    bool UpdateCourse(Kurs k);
+    List<Kurs> CoursesWithoutInstructor();
+    void RemoveInstructorFromCourse(string instructorId);
   }
 }

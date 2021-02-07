@@ -14,6 +14,13 @@
       <li class="nav-item">
         @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })
       </li>
+      <li class="nav-item">@Html.ActionLink("Kurset", "AllCourses", "Course", null, new { @class = "nav-link" })</li>
+      @if (Request.IsAuthenticated)
+      {
+        <li class="nav-item">
+          @Html.ActionLink("Forumi", "Index", "Forum", new { area = "" }, new { @class = "nav-link" })
+        </li>
+      }
     </ul>
     @Html.Partial("_LoginPartial")
   </div>

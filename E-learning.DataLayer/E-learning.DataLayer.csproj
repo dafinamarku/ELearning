@@ -108,6 +108,26 @@
     <Compile Include="Migrations\202101250057192_SeksioniId_ForeignKey.designer.cs">
       <DependentUpon>202101250057192_SeksioniId_ForeignKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101311142058_Photo.cs" />
+    <Compile Include="Migrations\202101311142058_Photo.designer.cs">
+      <DependentUpon>202101311142058_Photo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101311626542_Komentet.cs" />
+    <Compile Include="Migrations\202101311626542_Komentet.designer.cs">
+      <DependentUpon>202101311626542_Komentet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102011241447_change.cs" />
+    <Compile Include="Migrations\202102011241447_change.designer.cs">
+      <DependentUpon>202102011241447_change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102030833321_AutoriId.cs" />
+    <Compile Include="Migrations\202102030833321_AutoriId.designer.cs">
+      <DependentUpon>202102030833321_AutoriId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102030914087_KomentIdNull.cs" />
+    <Compile Include="Migrations\202102030914087_KomentIdNull.designer.cs">
+      <DependentUpon>202102030914087_KomentIdNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,6 +163,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101250057192_SeksioniId_ForeignKey.resx">
       <DependentUpon>202101250057192_SeksioniId_ForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101311142058_Photo.resx">
+      <DependentUpon>202101311142058_Photo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101311626542_Komentet.resx">
+      <DependentUpon>202101311626542_Komentet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102011241447_change.resx">
+      <DependentUpon>202102011241447_change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102030833321_AutoriId.resx">
+      <DependentUpon>202102030833321_AutoriId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102030914087_KomentIdNull.resx">
+      <DependentUpon>202102030914087_KomentIdNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

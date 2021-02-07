@@ -124,3 +124,5 @@ C:\Users\user\source\repos\E-learning\E-learning\obj\Debug\E-learning.csproj.Cor
 C:\Users\user\source\repos\E-learning\E-learning\obj\Debug\E-learning.csproj.CopyComplete
 C:\Users\user\source\repos\E-learning\E-learning\obj\Debug\E-learning.dll
 C:\Users\user\source\repos\E-learning\E-learning\obj\Debug\E-learning.pdb
+C:\Users\user\source\repos\E-learning\E-learning\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\user\source\repos\E-learning\E-learning\bin\Microsoft.Owin.Host.SystemWeb.xml

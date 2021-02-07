@@ -21,5 +21,6 @@ namespace E_learning.DataLayer
     public DbSet<Nivel> Nivelet { get; set; }
     public DbSet<Tip> Tipet { get; set; }
     public DbSet<KursNivelTip> KursNivelTip { get; set; }
+    public DbSet<Koment> Komentet { get; set; }
   }
 }

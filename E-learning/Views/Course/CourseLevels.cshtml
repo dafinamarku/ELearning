@@ -5,7 +5,11 @@
 }
 <div class="container">
   <br />
-  <h5>@Html.ActionLink("< Kurset", "AllCourses", "Course")</h5>
+    <h5 class="float-left">@Html.ActionLink("< Kurset", "AllCourses", "Course")</h5>
+    <div class="float-right" style="margin-right:0px">
+      <a href="/Course/MyFavoriteCourses" class="btn btn-warning text-white">Kurset e preferuara <i class="fas fa-star"></i></a>
+    </div>
+  <br />
   <hr />
   <br />
   <h2 class="text-center">@ViewBag.Kursi</h2>

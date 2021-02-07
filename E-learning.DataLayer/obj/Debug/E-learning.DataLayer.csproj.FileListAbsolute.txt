@@ -38,3 +38,8 @@ C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E-learning.
 C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E-learning.DataLayer.csproj.CopyComplete
 C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E-learning.DataLayer.dll
 C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E-learning.DataLayer.pdb
+C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.Photo.resources
+C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.Komentet.resources
+C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.change.resources
+C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.AutoriId.resources
+C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.KomentIdNull.resources

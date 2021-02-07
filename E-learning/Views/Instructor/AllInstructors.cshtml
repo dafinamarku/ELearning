@@ -1,0 +1,77 @@
+﻿@model IEnumerable<E_learning.DomainModels.ViewModels.InstructorViewModel>
+@{
+    ViewBag.Title = "All Instructors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <br />
+  @Html.Partial("_Notifications")
+  <h2>Instruktoret</h2>
+  <hr />
+  <br />
+  @if (Model.Count() == 0)
+  {
+    <p class="text-center">Sistemi nuk ka asnje instruktor.</p>
+  }
+  else
+  {
+    <table class="table table-hover">
+      <tr>
+        <th>
+          Emri
+        </th>
+        <th>Kursi qe drejton</th>
+        <th></th>
+      </tr>
+      @foreach (var element in Model)
+      {
+      <tr>
+        <td>
+          @Html.DisplayFor(x => element.Instructor.Emri) @Html.DisplayFor(x => element.Instructor.Mbiemri)
+        </td>
+        @if (element.InstructorsCourse == null)
+        {
+          <td class="text-danger">Nuk drejton asnje kurs</td>
+          if ((int)ViewBag.NrCoursesWithoutInstructor == 0)
+          {
+            <td><a href="#" class="btn btn-sm btn-light btn-outline-dark" data-toggle="modal" data-target="#infoModal">Percaktoi nje kurs</a></td>
+          }
+          else
+          {
+            <td><a href="/Instructor/CaktoiNjeKurs/@element.Instructor.Id" class="btn btn-sm btn-light btn-outline-dark">Percaktoi nje kurs</a></td>
+          }
+        }
+        else
+        {
+          <td>@Html.DisplayFor(x => element.InstructorsCourse.Emri)</td>
+          <td><a href="/Instructor/CaktoiNjeKurs/@element.Instructor.Id" class="btn btn-sm btn-light btn-outline-warning">Ndrysho kursin qe drejton</a></td>
+        }
+      </tr>
+      }
+    </table>
+  }
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoModalLabel">Nuk ka kurse te disponueshme</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Momentalisht nuk ka asnje kurs pa instruktor ne sistem. Krijoni me pare nje kurs te cilin me pas mund 
+        t'ja caktoni nje instruktori. <br />
+        <a href="#">Krijo kurs</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Mbyll</button>
+      </div>
+    </div>
+  </div>
+</div>

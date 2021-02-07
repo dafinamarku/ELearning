@@ -13,3 +13,4 @@ C:\Users\user\source\repos\E-learning\E-learning.DomainModels\obj\Debug\E-learni
 C:\Users\user\source\repos\E-learning\E-learning.DomainModels\obj\Debug\E-learning.DomainModels.csproj.CopyComplete
 C:\Users\user\source\repos\E-learning\E-learning.DomainModels\obj\Debug\E-learning.DomainModels.dll
 C:\Users\user\source\repos\E-learning\E-learning.DomainModels\obj\Debug\E-learning.DomainModels.pdb
+C:\Users\user\source\repos\E-learning\E-learning.DomainModels\obj\Debug\E-learning.DomainModels.csprojAssemblyReference.cache

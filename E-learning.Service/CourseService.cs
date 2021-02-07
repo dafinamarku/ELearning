@@ -32,5 +32,25 @@ namespace E_learning.Service
     {
       return repository.GetCourseSections(id);
     }
+
+    public bool CreateCourse(Kurs k)
+    {
+      return repository.CreateCourse(k);
+    }
+
+    public bool UpdateCourse(Kurs k)
+    {
+      return repository.UpdateCourse(k);
+    }
+
+    public List<Kurs> CoursesWithoutInstructor()
+    {
+      return repository.CoursesWithoutInstructor();
+    }
+
+    public void RemoveInstructorFromCourse(string instructorId)
+    {
+      repository.RemoveInstructorFromCourse(instructorId);
+    }
   }
 }

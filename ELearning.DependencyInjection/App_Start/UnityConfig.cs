@@ -50,8 +50,14 @@ namespace ELearning.DependencyInjection
             container.RegisterType<ICourseRepository, CourseRepository>();
             container.RegisterType<ICourseService, CourseService>();
 
-          container.RegisterType<ILevelRepository, LevelRepository>();
-          container.RegisterType<ILevelService, LevelService>();
+            container.RegisterType<ILevelRepository, LevelRepository>();
+            container.RegisterType<ILevelService, LevelService>();
+
+            container.RegisterType<ICommentsRepository, CommentsRepository>();
+            container.RegisterType<ICommentsService, CommentsService>();
+
+            container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IUserService, UserService>();
         }
     }
 }

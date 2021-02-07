@@ -1,0 +1,63 @@
+﻿@model E_learning.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <br />
+  <h2>Regjistrohu</h2>
+  <hr />
+  <br />
+  @using (Html.BeginForm())
+  {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, null, new { @class = "text-danger" })
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        @Html.LabelFor(model => model.Emri, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Emri, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Emri, null, new { @class = "text-danger" })
+      </div>
+      <div class="form-group col-md-4">
+        @Html.LabelFor(model => model.Mbiemri, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Mbiemri, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Mbiemri, null, new { @class = "text-danger" })
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Username, null, new { @class = "text-danger" })
+      </div>
+      <div class="form-group col-md-4">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
+      </div>
+      <div class="form-group col-md-4">
+        @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger" })
+      </div>
+    </div>
+    <br />
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Regjistrohu" class="btn btn-success" /> &nbsp;&nbsp;
+        <a href="/Home/Index" class="btn btn-secondary">Anulo</a>
+      </div>
+    </div>
+    <br />
+    <p>E keni tashme nje profil? <a href="/Account/Login">Login</a></p>
+  }
+</div>
+

@@ -1,0 +1,168 @@
+﻿@model IEnumerable<E_learning.DomainModels.Koment>
+@{
+  ViewBag.Title = "Index";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/ForumStyles.css" rel="stylesheet" />
+<div class="container">
+  <br />
+  @Html.Partial("_Notifications")
+  <h2 class="text-center">Miresevini ne Chat</h2>
+  <hr />
+  <br />
+  @using (Html.BeginForm("PostComment", "Forum", FormMethod.Post))
+  {
+    <div class="row">
+      <div class="col-md-2">
+        <img src="@MaterialPaths.ProfileImagesPath" alt="No image" style="height:64px;" class="img-responsive img-circle" />
+      </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control" name="CommentText" placeholder="Komento ketu ..." style="height:60px; font-size:15px;" />
+      </div>
+      <div class="col-md-2">
+        <input type="submit" value="Komento" class="btn btn-primary" style="margin-bottom:15px" />
+      </div>
+    </div>
+  }
+
+  @*Shfaqim te gjithe komentet*@
+  @foreach (var comment in Model.Where(x => x.KomentId == null))
+  {
+    <div class="container mb-5 mt-5">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="media">
+                  <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+                  <div class="media-body">
+                    <div class="row">
+                      <div class="col-8 d-flex">
+                        <h5>@comment.Autori.Emri @comment.Autori.Mbiemri</h5> <span>  - @comment.DataEKrijimit</span>
+                      </div>
+                      <div class="col-4">
+                        <div class="pull-right reply">
+                          <a href="#pergjigju_@comment.Id"><span><i class="fa fa-reply"></i> Pergjigju</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                          @if (comment.AutoriId == ViewBag.UserId)
+                          {
+                            <a href="#" onclick="addLinkTo('/Forum/DeleteComment/@comment.Id', 'fshiKomentLink')" data-toggle="modal" data-target="#deleteCommentModalCenter" data-placement="top" title="Fshi Komentin"><i class="far fa-trash-alt"></i></a>
+                          }
+                        </div>
+                      </div>
+                    </div> @comment.Teksti<br /><br /><br />
+                    <button type="button" id="showHideBtn_@comment.Id" onclick="Pergjigjet('pergjigjet_@comment.Id', 'showHideBtn_@comment.Id')" class="btn btn-sm btn-outline-dark bg-light text-dark">Shiko Pergjigjet <i class="fas fa-plus"></i></button>
+                    <br />@*Pergjigjet*@
+                    <div id="pergjigjet_@comment.Id" style="display:none">
+                      @foreach (var reply in comment.Pergjigjet)
+                      {
+                        <div class="media mt-4">
+                          <img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" />
+                          <div class="media-body">
+                            <div class="row">
+                              @if (comment.AutoriId == ViewBag.UserId)
+                              {
+                                <div class="float-right" style="position:absolute; right:30%">
+                                  <a href="#" onclick="addLinkTo('/Forum/DeleteComment/@comment.Id', 'fshiPergjigjeLink')" data-toggle="modal" data-target="#deleteReplyModalCenter" title="Fshi Pergjigjen"><i class="far fa-trash-alt"></i></a>
+                                </div>
+                              }
+                              <div class="col-12 d-flex">
+                                <h5>@reply.Autori.Emri @reply.Autori.Mbiemri</h5> <span>  - @reply.DataEKrijimit</span>
+                              </div>
+                            </div>
+                            @reply.Teksti
+                          </div>
+                        </div>
+                      }
+                    </div>
+
+                    <br />
+                    @using (Html.BeginForm("PostReply", "Forum", FormMethod.Post))
+                    {
+                      <div class="row">
+                        <input type="text" id="pergjigju_@comment.Id" class="form-control col-md-6" name="Replytext" placeholder="Pergjigju ketu ..." style="height:60px; font-size:15px;" />
+                        <input type="hidden" name="CID" value="@comment.Id" />
+                        <div class="col-md-2">
+                          <input type="submit" value="Pergjigju" class="btn btn-primary" />
+                        </div>
+
+                      </div>
+
+
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  <!-- Delete Comment Modal -->
+  <div class="modal fade" id="deleteCommentModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Jeni te sigurt per fshirjen e komentit?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Me fshirjen e ketij komenti do te fshihen edhe te gjitha pergjigjet e tij.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
+          <a href=" " id="fshiKomentLink" type="button" class="btn btn-danger">Fshi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Delete Reply Modal -->
+  <div class="modal fade" id="deleteReplyModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteReplyModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Jeni te sigurt per fshirjen e pergjigjes?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
+          <a href=" " id="fshiPergjigjeLink" type="button" class="btn btn-danger">Fshi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    $("#replyDelete").click(function () {
+      $("#replyModal").modal('show');
+    });
+    $("#commentDelete").click(function () {
+      $("#commentModal").modal('show');
+    });
+  });
+
+  function Pergjigjet(id, btnId) {
+    var x = document.getElementById(id);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      document.getElementById(btnId).innerHTML = 'Fsheh Pergjigjet <i class="fas fa-minus"></i>';
+    } else {
+      x.style.display = "none";
+      document.getElementById(btnId).innerHTML = 'Shiko Pergjigjet <i class="fas fa-plus"></i>';
+    }
+  }
+
+  function addLinkTo(link, id) {
+    document.getElementById(id).href = link;
+  }
+</script>
+

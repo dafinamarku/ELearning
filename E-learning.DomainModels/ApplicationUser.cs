@@ -13,6 +13,8 @@ namespace E_learning.DomainModels
   {
     public string Emri { get; set; }
     public string Mbiemri { get; set; }
+    public string Photo { get; set; }
     public virtual ICollection<Kurs> KursetEPreferuara { get; set; }
+    public virtual ICollection<Koment> Komentet { get; set; }
   }
 }
