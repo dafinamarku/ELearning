@@ -11,6 +11,12 @@ namespace E_learning.DomainModels
   public class KursNivelTip
   {
     public int Id { get; set; }
+    [ForeignKey("Kursi")]
+    public int? KursiId { get; set; }
+    [ForeignKey("Niveli")]
+    public int? NiveliId { get; set; }
+    [ForeignKey("Tipi")]
+    public int? TipiId { get; set; }
     public virtual Kurs Kursi { get; set; }
     public virtual Tip Tipi { get; set; }
     public virtual Nivel Niveli { get; set; }

@@ -43,3 +43,6 @@ C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.
 C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.change.resources
 C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.AutoriId.resources
 C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.KomentIdNull.resources
+C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.KursNivelTipFK.resources
+C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.KursNivelTipFKNullable.resources
+C:\Users\user\source\repos\E-learning\E-learning.DataLayer\obj\Debug\E_learning.DataLayer.Migrations.MaterialValidationConstraints.resources

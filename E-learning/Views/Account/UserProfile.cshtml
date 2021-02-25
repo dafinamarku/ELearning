@@ -11,14 +11,14 @@
   <div class="well">
     <hr />
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-4">
         @if (!string.IsNullOrEmpty(Model.Photo))
         {
           <img src="@MaterialPaths.ProfileImagesPath@Model.Photo" alt="No Image" style="height:200px;" class="img-responsive img-circle" />
         }
         else
         {
-          <img src="@Url.Content("~/Profile Images/WF.jpg")" alt="No Image" style="height:200px" class="img-responsive img-circle" />
+          <img class="img-responsive img-circle" style="height:200px;" alt="Bootstrap Media Preview" src="/Content/ProfileImages/defaultProfileImage.png" />
         }
       </div>
       <div class="col-md-5">
@@ -38,8 +38,13 @@
           </dd>
         </dl>
       </div>
-      <div class="col-md-4">
-        @Html.ActionLink("Ndrysho Password-in", "ChangePassword", "Account", null, new { @class = "btn btn-outline-dark " })
+      <div class="col-md-3">
+        @Html.ActionLink("Ndrysho Password-in", "ChangePassword", "Account", null, new { @class = "btn btn-outline-dark " })  
+        @if (User.IsInRole("Instruktor"))
+        {
+
+          @Html.ActionLink("Kursi im", "MyCourse", "Course", null, new { @class = "btn btn-dark", @style="margin-top:20px" })
+        }
       </div>
     </div>
 

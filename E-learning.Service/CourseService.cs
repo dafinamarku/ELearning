@@ -52,5 +52,29 @@ namespace E_learning.Service
     {
       repository.RemoveInstructorFromCourse(instructorId);
     }
+
+    public void DeleteCourse(int id)
+    {
+      repository.DeleteCourse(id);
+    }
+
+    public bool CanUserModifyCourseLevelsAndTypes(string uid, int courseId)
+    {
+      var course = repository.GetCourseById(courseId);
+      return (course != null && course.InstruktoriId == uid);
+    }
+
+    public Kurs GetInstructorsCourse(string instructorId)
+    {
+      return
+        repository.GetAllCourses().FirstOrDefault(x => x.InstruktoriId == instructorId);
+    }
+
+    public List<Kurs> SearchCourses(string search)
+    {
+      var allCourses = this.GetAllCourses();
+      search = search.ToUpper();
+      return allCourses.Where(x => x.Emri.ToUpper().Contains(search)).ToList();
+    }
   }
 }

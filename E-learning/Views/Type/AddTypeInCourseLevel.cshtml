@@ -1,0 +1,44 @@
+﻿@model E_learning.DomainModels.Tip
+@{
+  ViewBag.Title = "AddTypeInCourseLevel";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <br />
+  @Html.Partial("_Notifications")
+  <h2 class="text-center">Shto nje tip ne nivelin @ViewBag.Level te kursit @ViewBag.Course</h2>
+  <hr />
+  <br />
+  @{ SelectList list = (SelectList)ViewBag.AvaliableTypes;}
+
+  @if (list == null || list.Count() == 0)
+  {
+    <p class="text-center text-info">
+      Nuk ka asnje tip te disponueshem per tu shtuar.
+      <br /><b><a href="/Course/CourseLevelTypes?courseId=@ViewBag.CourseId&levelId=@ViewBag.LevelId">Kthehu tek nivelet</a></b>
+    </p>
+  }
+  else
+  {
+    using (Html.BeginForm("AddTypeInCourseLevel", "Type", new { @courseId = ViewBag.CourseId, @levelId=ViewBag.LevelId }, FormMethod.Post, null))
+    {
+      <div class="row">
+        <div class="col" style=" left: 35%; transform: translateX(-35 %)">
+          <label class="text-center font-weight-bold">Tipet e disponueshme</label>
+          @Html.DropDownListFor(x=>x.Id,(SelectList)ViewBag.AvaliableTypes,
+              "Zgjidhni nje tip ---", htmlAttributes: new { @class = "form-control", style = "width: 300px;" })
+          <br />
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-light btn-outline-dark">Shto</button> &nbsp;&nbsp;
+        <a href="/Course/CourseLevelTypes?courseId=@ViewBag.CourseId&levelId=@ViewBag.LevelId" class="btn btn-secondary">Anulo</a>
+      </div>
+    }
+  }
+
+
+</div>
+
+

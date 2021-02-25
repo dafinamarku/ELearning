@@ -92,5 +92,15 @@ namespace E_learning.Repository
       return true;
     }
 
+    public bool DeleteUser(string UserId)
+    {
+      ApplicationUser existingApplicationUser = db.Users.Where(x => x.Id == UserId).FirstOrDefault();
+      IdentityResult result = userManager.Delete(existingApplicationUser);
+      if (result.Succeeded)
+        return true;
+      else
+        return false;
+    }
+
   }
 }

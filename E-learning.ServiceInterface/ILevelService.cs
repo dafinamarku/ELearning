@@ -10,5 +10,7 @@ namespace E_learning.ServiceInterface
   public interface ILevelService
   {
     Nivel GetLevelById(int id);
+    List<Nivel> GetAvailableLevelsForCourse(int courseId);
+    List<Nivel> GetCourseLevels(int courseId);
   }
 }

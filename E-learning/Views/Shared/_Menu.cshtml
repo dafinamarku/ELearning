@@ -1,6 +1,6 @@
 ﻿
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  @Html.ActionLink("App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+  @Html.ActionLink("E-Learning", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     <span class="navbar-toggler-icon"></span>
@@ -11,15 +11,36 @@
       <li class="nav-item">
         @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
       </li>
-      <li class="nav-item">
-        @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })
-      </li>
-      <li class="nav-item">@Html.ActionLink("Kurset", "AllCourses", "Course", null, new { @class = "nav-link" })</li>
+      <li class="nav-item">@Html.ActionLink("Kurset", "AllCourses", "Course", new { @search = string.Empty }, new { @class = "nav-link" })</li>
       @if (Request.IsAuthenticated)
       {
         <li class="nav-item">
           @Html.ActionLink("Forumi", "Index", "Forum", new { area = "" }, new { @class = "nav-link" })
         </li>
+        if (User.IsInRole("Admin"))
+        {
+          <li class="nav-item">
+            @Html.ActionLink("Instruktoret", "AllInstructors", "Instructor", null, new { @class = "nav-link" })
+          </li>
+        }
+        else
+        {
+          if (User.IsInRole("Student"))
+          {
+            <li class="nav-item">
+              @Html.ActionLink("Pyetsore", "CourseQuizzes", "Course", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+              @Html.ActionLink("Kurset e mija", "MyFavoriteCourses", "Course", null, new { @class = "nav-link" })
+            </li>
+          }
+          else //ne kete rast eshte Instruktor
+          {
+            <li class="nav-item">
+              @Html.ActionLink("Kursi im", "MyCourse", "Course", null, new { @class = "nav-link" })
+            </li>
+          }
+        }
       }
     </ul>
     @Html.Partial("_LoginPartial")

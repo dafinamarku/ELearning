@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace E_learning.DomainModels
   public class Kurs
   {
     public int KursId { get; set; }
+    [Required(ErrorMessage ="Fusha {0} eshte e kerkuar.")]
+    [StringLength(30, ErrorMessage ="Emri i Kursit nuk mund te jete me i gjate se 30 karaktere.")]
     public string Emri { get; set; }
     public string InstruktoriId { get; set; }
     public string Photo { get; set; }

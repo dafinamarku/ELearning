@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace E_learning.Repository
 {
-  public class LevelRepository:ILevelRepository
+  public class LevelRepository : ILevelRepository
   {
     ProjectDbContext db;
 
@@ -22,5 +22,25 @@ namespace E_learning.Repository
     {
       return db.Nivelet.FirstOrDefault(x => x.Id == id);
     }
+
+    public List<Nivel> GetCourseLevels(int courseId)
+    {
+      List<Nivel> courseLevels = db.KursNivelTip.Where(x => x.KursiId == courseId).Select(x => x.Niveli).Distinct().ToList();
+
+      return courseLevels;
+    }
+
+    public List<Nivel> GetAvailableLevelsForCourse(int courseId)
+    {
+      var currentCourseLevels = this.GetCourseLevels(courseId);
+      List<Nivel> availableLevels = new List<Nivel>();
+      foreach (var level in db.Nivelet.ToList())
+      {
+        if (!currentCourseLevels.Contains(level))
+          availableLevels.Add(level);
+      }
+      return availableLevels;
+    }
+
   }
 }

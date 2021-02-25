@@ -1,27 +1,80 @@
-﻿@model Dictionary<int, string>
+﻿@model Dictionary<int, E_learning.DomainModels.Tip>
+  @using Microsoft.AspNet.Identity;
 @{
   ViewBag.Title = "CoursetypeTypes";
   Layout = "~/Views/Shared/_Layout.cshtml";
+  //perdoret per te kontrolluar nese useri aktual eshte instruktor i kursit
+  bool isCourseInstructor = (ViewBag.InstruktorId == User.Identity.GetUserId());
 }
 
 <div class="container">
   <br />
-  <h5>@Html.ActionLink(ViewBag.Kursi as String, "AllCourses", "Course", null, null)>@Html.ActionLink(ViewBag.Niveli as String, "CourseLevels", "Course", new { id = ViewBag.KursId }, null)</h5>
+  @Html.Partial("_Notifications")
+  <h5 class="float-left">@Html.ActionLink(ViewBag.Kursi as String, "AllCourses", "Course", new { @search=string.Empty }, null)>@Html.ActionLink(ViewBag.Niveli as String, "CourseLevels", "Course", new { id = ViewBag.KursId }, null)</h5>
+  @if (User.IsInRole("Instruktor") && isCourseInstructor)
+  {
+    int nrOfLevels = Model.Count();
+    if (nrOfLevels != 3)
+    {
+      <div class="float-right" style="margin-right:0px">
+        <a href="/Type/AddTypeInCourseLevel?courseId=@ViewBag.KursId&levelId=@ViewBag.NivelId" class="btn btn-success">Shto Tip</a>
+      </div>
+    }
+  }
+  <br />
+  <br />
   <hr />
   <br />
   <h2 class="text-center">Tipet</h2>
   <br /><br />
   @if (Model == null || Model.Count() == 0)
   {
-    <p>Ky nivel nuk ka asnje tip per momentin</p>
+    <p class="text-info text-center">Ky nivel nuk ka asnje tip per momentin.</p>
   }
   else
   {
     foreach (var type in Model)
     {
-      @Html.ActionLink(type.Value, "MaterialsOfSection", "Material", new { @id = type.Key }, new { @class = "btn btn-dark btn-lg btn-block" })
+      <div class="form-inline text-center" style="margin-bottom:20px;">
+        <div class="col-md-11">
+          @Html.ActionLink(type.Value.Tipi, "MaterialsOfSection", "Material", new { @id = type.Key }, new { @class = "btn btn-dark btn-lg btn-block" })
+        </div>
+        @if (User.IsInRole("Instruktor") && isCourseInstructor)
+        {
+          <div class="col-md-1">
+            <a href="" data-toggle="modal" data-target="#deleteTypeModal" onclick="addLinkTo('/Type/DeleteTypeInCourseLevel?courseId=@ViewBag.KursId&levelId=@ViewBag.NivelId&typeId=@type.Value.Id', 'fshiTipLink')" class="btn btn-danger float-right text-white" title="Fshi tipin @type.Value"><i class="far fa-trash-alt"></i></a>
+          </div>
+        }
+      </div>
     }
   }
-
 </div>
 
+<!-- Delete Level Modal -->
+<div class="modal fade" id="deleteTypeModal" tabindex="-1" role="dialog" aria-labelledby="deleteTypeModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Jeni te sigurt per fshirjen e tipit?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Me fshirjen e ketij tipi do te fshihen edhe cdo materail i tij.
+      </div>
+      <div class="modal-footer">
+        <form method="post" id="fshiTipLink" action="">
+          <button type="submit" class="btn btn-danger">Fshi</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function addLinkTo(link, id) {
+    document.getElementById(id).action = link;
+  }
+</script>

@@ -46,6 +46,7 @@
     <Compile Include="ILevelRepository.cs" />
     <Compile Include="IMaterialRepository.cs" />
     <Compile Include="ISectionRepository.cs" />
+    <Compile Include="ITypeRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

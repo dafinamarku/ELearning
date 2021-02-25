@@ -51,7 +51,9 @@ namespace E_learning.Repository
       if (sameNameCourses.Count() > 0)
         return false;
       currentCourse.Emri = k.Emri;
-      currentCourse.Photo = k.Photo;
+      //rasti kur nuk upload-ohet nje foto ne momentin e editimit=>fotoja nuk duhet te ndryshoje
+      if(k.Photo!=null)
+        currentCourse.Photo = k.Photo;
       currentCourse.InstruktoriId = k.InstruktoriId;
       db.SaveChanges();
       return true;
@@ -72,6 +74,24 @@ namespace E_learning.Repository
         instructorsCourse.InstruktoriId = null;
         db.SaveChanges();
       }
+    }
+
+    public void DeleteCourse(int id)
+    {
+      var courseToDelete = db.Kurset.FirstOrDefault(x => x.KursId == id);
+      List<KursNivelTip> sectionsToDelete=db.KursNivelTip.Where(x => x.KursiId == id).ToList();
+      //fshijme materialet e cdo seksioni te kursit qe do te fshihet
+      List<Material> materialsToDelete = new List<Material>();
+      foreach(var section in sectionsToDelete)
+      {
+        var sectionMaterials = db.Materialet.Where(x => x.SeksioniId == section.Id);
+        materialsToDelete.AddRange(sectionMaterials);
+      }
+      db.Materialet.RemoveRange(materialsToDelete);
+      //fshijme seksionet e kursit qe do te fshihet
+      db.KursNivelTip.RemoveRange(sectionsToDelete);
+      db.Kurset.Remove(courseToDelete);
+      db.SaveChanges();
     }
   }
 }

@@ -170,7 +170,9 @@
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
+    <Compile Include="Controllers\LevelController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\TypeController.cs" />
     <Compile Include="Extensions\NotificationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,6 +191,10 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Carousel\carousel1.jpg" />
+    <Content Include="Content\Carousel\carousel2.png" />
+    <Content Include="Content\Carousel\carousel3.png" />
+    <Content Include="Content\Carousel\elearning.jpg" />
     <Content Include="Content\CourseImages\C-Sharp.png" />
     <Content Include="Content\CourseImages\dotNet.png" />
     <Content Include="Content\CourseImages\java_logo_640.jpg" />
@@ -196,6 +202,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\ForumStyles.css" />
     <Content Include="Content\Materials\Audio\Coldplay - The Scientist.mp3" />
+    <Content Include="Content\ProfileImages\defaultProfileImage.png" />
     <Content Include="Content\ProfileImages\Screenshot_20201127-155822_Instagram.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -401,6 +408,11 @@
     <Content Include="Views\Instructor\AllInstructors.cshtml" />
     <Content Include="Views\Instructor\CaktoiNjeKurs.cshtml" />
     <Content Include="Views\Course\MyFavoriteCourses.cshtml" />
+    <Content Include="Views\Course\CreateCourse.cshtml" />
+    <Content Include="Views\Level\AddLevelInCourse.cshtml" />
+    <Content Include="Views\Type\AddTypeInCourseLevel.cshtml" />
+    <Content Include="Views\Course\EditCourse.cshtml" />
+    <Content Include="Views\Course\CourseQuizzes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

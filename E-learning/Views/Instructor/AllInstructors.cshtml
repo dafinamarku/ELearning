@@ -7,7 +7,10 @@
 <div class="container">
   <br />
   @Html.Partial("_Notifications")
-  <h2>Instruktoret</h2>
+  <h2 class="float-left">Instruktoret</h2>
+  <a class="float-right btn btn-success" href="/Instructor/CreateInstructor">Shto Instruktor</a>
+  <br />
+  <br />
   <hr />
   <br />
   @if (Model.Count() == 0)
@@ -22,6 +25,7 @@
           Emri
         </th>
         <th>Kursi qe drejton</th>
+        <th></th>
         <th></th>
       </tr>
       @foreach (var element in Model)
@@ -47,6 +51,7 @@
           <td>@Html.DisplayFor(x => element.InstructorsCourse.Emri)</td>
           <td><a href="/Instructor/CaktoiNjeKurs/@element.Instructor.Id" class="btn btn-sm btn-light btn-outline-warning">Ndrysho kursin qe drejton</a></td>
         }
+        <td><a href="" data-toggle="modal" data-target="#deleteInstructorModal" onclick="addLinkTo('/Instructor/DeleteInstructor/@element.Instructor.Id', 'deleteInstructorForm')"><i  title="Fshi Instruktorin" class="far fa-trash-alt"></i></a></td>
       </tr>
       }
     </table>
@@ -67,7 +72,7 @@
       <div class="modal-body">
         Momentalisht nuk ka asnje kurs pa instruktor ne sistem. Krijoni me pare nje kurs te cilin me pas mund 
         t'ja caktoni nje instruktori. <br />
-        <a href="#">Krijo kurs</a>
+        <a href="/Course/CreateCourse">Krijo kurs</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Mbyll</button>
@@ -75,3 +80,32 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteInstructorModal" tabindex="-1" role="dialog" aria-labelledby="deleteInstructorModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Jeni te sigurt per fshirjen e instruktorit?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Me fshirjen e ketij instruktori, kursi qe ai drejton (nqs ka nje te tille) do te mbetet pa instruktor.
+      </div>
+      <div class="modal-footer">
+        <form method="post" action="" id="deleteInstructorForm">
+          <button type="submit" class="btn btn-danger">Fshi Instruktorin</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Mbyll</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function addLinkTo(link, id) {
+    document.getElementById(id).action = link;
+  }
+</script>

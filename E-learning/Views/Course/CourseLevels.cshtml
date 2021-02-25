@@ -1,23 +1,89 @@
 ﻿@model Dictionary<int, string>
+  @using Microsoft.AspNet.Identity;
 @{
-    ViewBag.Title = "CourseLevels";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "CourseLevels";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+  //perdoret per te kontrolluar nese useri aktual eshte instruktor i kursit
+  bool isCourseInstructor = (ViewBag.InstruktorId == User.Identity.GetUserId());
 }
 <div class="container">
   <br />
-    <h5 class="float-left">@Html.ActionLink("< Kurset", "AllCourses", "Course")</h5>
+  @Html.Partial("_Notifications")
+  <h5 class="float-left">@Html.ActionLink("< Kurset", "AllCourses", "Course", new { @search=string.Empty}, null)</h5>
+  @if (User.IsInRole("Student"))
+  {
     <div class="float-right" style="margin-right:0px">
       <a href="/Course/MyFavoriteCourses" class="btn btn-warning text-white">Kurset e preferuara <i class="fas fa-star"></i></a>
     </div>
+  }
+  else
+  {
+    if (User.IsInRole("Instruktor") && isCourseInstructor)
+    {
+      int nrOfLevels = Model.Count();
+      if (nrOfLevels != 3)
+      {
+        <div class="float-right" style="margin-right:0px">
+          <a href="/Level/AddLevelInCourse/@ViewBag.KursId" class="btn btn-success">Shto Nivel</a>
+        </div>
+      }
+    }
+  }
+  <br />
   <br />
   <hr />
   <br />
   <h2 class="text-center">@ViewBag.Kursi</h2>
   <br /><br />
-    @foreach(var level in Model)
+  @if (Model == null || Model.Count() == 0)
+  {
+    <p class="text-info text-center">Ky kurs nuk ka asnje nivel per momentin.</p>
+  }
+  else
+  {
+    foreach (var level in Model)
     {
-        @Html.ActionLink(level.Value, "CourseLevelTypes", "Course", new { @courseId=ViewBag.KursId, @levelId=level.Key }, new { @class= "btn btn-dark btn-lg btn-block" })
-    }
-</div>
+      <div class="form-inline text-center" style="margin-bottom:20px;">
+        <div class="col-md-11">
+          @Html.ActionLink(level.Value, "CourseLevelTypes", "Course", new { @courseId = ViewBag.KursId, @levelId = level.Key }, new { @class = "btn btn-dark btn-lg btn-block" })
+        </div>
+        @if (User.IsInRole("Instruktor") && isCourseInstructor)
+        {
+          <div class="col-md-1">
+            <a href="" data-toggle="modal" data-target="#deleteLevelModal" onclick="addLinkTo('/Level/DeleteLevelInCourse?levelId=@level.Key&courseId=@ViewBag.KursId', 'fshiNivelLink')" class="btn btn-danger float-right text-white" title="Fshi nivelin @level.Value"><i class="far fa-trash-alt"></i></a>
+          </div>
+        }
+      </div>
 
+    }
+  }
+</div>
+<!-- Delete Level Modal -->
+<div class="modal fade" id="deleteLevelModal" tabindex="-1" role="dialog" aria-labelledby="deleteLevelModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Jeni te sigurt per fshirjen e nivelit?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Me fshirjen e ketij niveli do te fshihen edhe cdo tip apo materail i tij.
+      </div>
+      <div class="modal-footer">
+        <form method="post" id="fshiNivelLink" action="">
+          <button type="submit" class="btn btn-danger">Fshi</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function addLinkTo(link, id) {
+    document.getElementById(id).action = link;
+  }
+</script>
 

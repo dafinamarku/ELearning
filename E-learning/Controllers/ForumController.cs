@@ -10,21 +10,25 @@ using System.Web.Mvc;
 
 namespace E_learning.Controllers
 {
-    [Authorize(Roles ="Student, Instruktor")]
+    [Authorize]
     public class ForumController : Controller
     {
 
         ICommentsService commentService;
-        public ForumController(ICommentsService serv)
+        IUserService userService;
+        public ForumController(ICommentsService serv, IUserService userv)
         {
           this.commentService=serv;
+          this.userService = userv;
         }
 
         // GET: Forum
         public ActionResult Index()
         {
             var model = commentService.GetAllComments();
-            ViewBag.UserId = User.Identity.GetUserId();
+            string uid= User.Identity.GetUserId();
+            ViewBag.UserId = uid;
+            ViewBag.UserPhoto = userService.GetUserById(uid).Photo;
             return View(model);
         }
 

@@ -22,5 +22,15 @@ namespace E_learning.Service
     {
       return repository.GetLevelById(id);
     }
+
+    public List<Nivel> GetAvailableLevelsForCourse(int courseId)
+    {
+      return repository.GetAvailableLevelsForCourse(courseId);
+    }
+
+    public List<Nivel> GetCourseLevels(int courseId)
+    {
+      return repository.GetCourseLevels(courseId);
+    }
   }
 }

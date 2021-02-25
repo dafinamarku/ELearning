@@ -1,6 +1,7 @@
 ﻿using E_learning.DomainModels;
 using E_learning.Extensions;
 using E_learning.ServiceInterface;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,17 +15,20 @@ namespace E_learning.Controllers
     {
         IMaterialService mService;
         ISectionService sectionService;
-
-        public MaterialController(IMaterialService mser, ISectionService ser, ILevelService levserv)
+        ICourseService courseService;
+        public MaterialController(IMaterialService mser, ISectionService ser, ICourseService cserv)
         {
           this.mService = mser;
           this.sectionService = ser;
+          this.courseService = cserv;
         }
 
+        [Authorize]
         public ActionResult MaterialsOfSection(int id)
         {
             KursNivelTip currentSection = sectionService.GetSectionById(id);
-            if (currentSection == null)
+            //nuk mund te aksesohen materialet e nje seksioni qe nuk ekziston ose qe nuk ka nje tip
+            if (currentSection == null || currentSection.TipiId==null)
               return new HttpNotFoundResult();
             List<Material> materials = mService.GetMaterialsOf(id);
             ViewBag.Kursi = currentSection.Kursi.Emri;
@@ -33,6 +37,7 @@ namespace E_learning.Controllers
             ViewBag.NivelId = currentSection.Niveli.Id;
             ViewBag.Tipi = currentSection.Tipi.Tipi;
             ViewBag.SeksionId = currentSection.Id;
+            ViewBag.InstruktorId = currentSection.Kursi.InstruktoriId;
             return View(materials);
         }
 
@@ -102,10 +107,13 @@ namespace E_learning.Controllers
       
         }
 
+    [Authorize(Roles ="Instruktor")]
     public ActionResult AddMaterialInSection(int id)// id e seksionit
     {
       var section = sectionService.GetSectionById(id);
-      if (section == null)
+      string uid = User.Identity.GetUserId();
+      //vetem instruktori i kursit perkates qe permban seksionin ka te drejte te shtoje materiale
+      if (section == null || !courseService.CanUserModifyCourseLevelsAndTypes(uid, (int)section.KursiId))
         return HttpNotFound();
       ViewBag.SeksionId = section.Id;
       ViewBag.Kursi = section.Kursi.Emri;
@@ -122,8 +130,14 @@ namespace E_learning.Controllers
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Instruktor")]
     public ActionResult AddMaterialInSection(HttpPostedFileBase file, Material model)
     {
+      var section = sectionService.GetSectionById(model.SeksioniId);
+      string uid = User.Identity.GetUserId();
+      //vetem instruktori i kursit perkates qe permban seksionin ka te drejte te shtoje materiale
+      if (section == null || !courseService.CanUserModifyCourseLevelsAndTypes(uid, (int)section.KursiId))
+        return HttpNotFound();
       if (file != null)
       {
         string error = ValidateFile(file, model.SeksioniId);
@@ -158,7 +172,6 @@ namespace E_learning.Controllers
         else
           ModelState.AddModelError("err", "Nje material me te njetin titull tashme ekziston. Julutem zgjidhni nje titull tjeter per materialin tuaj.");
       }
-      var section = sectionService.GetSectionById(model.SeksioniId);
       ViewBag.SeksionId = section.Id;
       ViewBag.Kursi = section.Kursi.Emri;
       ViewBag.KursId = section.Kursi.KursId;
@@ -168,10 +181,16 @@ namespace E_learning.Controllers
       return View(model);
     }
 
-
+    [Authorize(Roles = "Instruktor")]
     public ActionResult EditMaterial(int id)
     {
+
       var model=mService.GetMaterialById(id);
+      var section = sectionService.GetSectionById(model.SeksioniId);
+      string uid = User.Identity.GetUserId();
+      //vetem instruktori i kursit perkates qe permban seksionin ka te drejte te shtoje materiale
+      if (section == null || !courseService.CanUserModifyCourseLevelsAndTypes(uid, (int)section.KursiId))
+        return HttpNotFound();
       ViewBag.SeksionId = model.SeksioniId;
       ViewBag.Kursi = model.Seksioni.Kursi.Emri;
       ViewBag.KursId = model.Seksioni.Kursi.KursId;
@@ -183,8 +202,14 @@ namespace E_learning.Controllers
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Instruktor")]
     public ActionResult EditMaterial(HttpPostedFileBase file, Material model)
     {
+      var section = sectionService.GetSectionById(model.SeksioniId);
+      string uid = User.Identity.GetUserId();
+      //vetem instruktori i kursit perkates qe permban seksionin ka te drejte te shtoje materiale
+      if (section == null || !courseService.CanUserModifyCourseLevelsAndTypes(uid, (int)section.KursiId))
+        return HttpNotFound();
       if (file != null)
       {
         string error = ValidateFile(file, model.SeksioniId);
@@ -198,6 +223,7 @@ namespace E_learning.Controllers
       {
         if (file != null)
         {
+          model.Filename = file.FileName;
           try
           {
             RuajFile(file, model.SeksioniId);
@@ -223,6 +249,24 @@ namespace E_learning.Controllers
       ViewBag.NivelId = model.Seksioni.Niveli.Id;
       ViewBag.Tipi = model.Seksioni.Tipi.Tipi;
       return View(model);
+    }
+
+    [Authorize(Roles ="Instruktor")]
+    public ActionResult DeleteMaterial(int id, int sectionId)
+    {
+      var section = sectionService.GetSectionById(sectionId);
+      string uid = User.Identity.GetUserId();
+      //vetem instruktori i kursit perkates qe permban seksionin ka te drejte te fshije materiale
+      if (section == null || !courseService.CanUserModifyCourseLevelsAndTypes(uid, (int)section.KursiId))
+        return HttpNotFound();
+      bool wasDeleted = mService.DeleteMaterial(id);
+      if(wasDeleted)
+      {
+        this.AddNotification("Materiali u fshi", NotificationType.SUCCESS);
+        return RedirectToAction("MaterialsOfSection", new { @id = sectionId });
+      }
+      //mariali nuk fshihet ne rast se ai nuk ekziston
+      return new HttpNotFoundResult();
     }
   }
 }

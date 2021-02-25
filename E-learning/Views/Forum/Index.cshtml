@@ -7,14 +7,21 @@
 <div class="container">
   <br />
   @Html.Partial("_Notifications")
-  <h2 class="text-center">Miresevini ne Chat</h2>
+  <h2 class="text-center">Miresevini ne Forum</h2>
   <hr />
   <br />
   @using (Html.BeginForm("PostComment", "Forum", FormMethod.Post))
   {
     <div class="row">
       <div class="col-md-2">
-        <img src="@MaterialPaths.ProfileImagesPath" alt="No image" style="height:64px;" class="img-responsive img-circle" />
+        @if (ViewBag.UserPhoto != null)
+        {
+          <img style="max-height:100px" class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="@MaterialPaths.ProfileImagesPath@ViewBag.UserPhoto" />
+        }
+        else
+        {
+          <img style="max-height:100px" class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="/Content/ProfileImages/defaultProfileImage.png" />
+        }
       </div>
       <div class="col-md-6">
         <input type="text" class="form-control" name="CommentText" placeholder="Komento ketu ..." style="height:60px; font-size:15px;" />
@@ -35,7 +42,14 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="media">
-                  <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+                  @if (comment.Autori.Photo != null)
+                  {
+                    <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="@MaterialPaths.ProfileImagesPath@comment.Autori.Photo" />
+                  }
+                  else
+                  {
+                    <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="/Content/ProfileImages/defaultProfileImage.png" />
+                  }
                   <div class="media-body">
                     <div class="row">
                       <div class="col-8 d-flex">
@@ -56,15 +70,23 @@
                     <div id="pergjigjet_@comment.Id" style="display:none">
                       @foreach (var reply in comment.Pergjigjet)
                       {
+                       
                         <div class="media mt-4">
-                          <img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" />
+                          @if (reply.Autori.Photo != null)
+                          {
+                            <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="@MaterialPaths.ProfileImagesPath@reply.Autori.Photo" />
+                          }
+                          else
+                          {
+                            <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="/Content/ProfileImages/defaultProfileImage.png" />
+                          }
                           <div class="media-body">
                             <div class="row">
-                              @if (comment.AutoriId == ViewBag.UserId)
+                              @if (reply.AutoriId == ViewBag.UserId)
                               {
-                                <div class="float-right" style="position:absolute; right:30%">
-                                  <a href="#" onclick="addLinkTo('/Forum/DeleteComment/@comment.Id', 'fshiPergjigjeLink')" data-toggle="modal" data-target="#deleteReplyModalCenter" title="Fshi Pergjigjen"><i class="far fa-trash-alt"></i></a>
-                                </div>
+                              <div style="padding-left:40%">
+                                <a href="#" onclick="addLinkTo('/Forum/DeleteComment/@reply.Id', 'fshiPergjigjeLink')" data-toggle="modal" data-target="#deleteReplyModalCenter" title="Fshi Pergjigjen"><i class="far fa-trash-alt"></i></a>
+                              </div>
                               }
                               <div class="col-12 d-flex">
                                 <h5>@reply.Autori.Emri @reply.Autori.Mbiemri</h5> <span>  - @reply.DataEKrijimit</span>
@@ -87,8 +109,6 @@
                         </div>
 
                       </div>
-
-
                     }
                   </div>
                 </div>
@@ -113,8 +133,9 @@
           Me fshirjen e ketij komenti do te fshihen edhe te gjitha pergjigjet e tij.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
           <a href=" " id="fshiKomentLink" type="button" class="btn btn-danger">Fshi</a>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
+
         </div>
       </div>
     </div>
@@ -130,8 +151,9 @@
           </button>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
           <a href=" " id="fshiPergjigjeLink" type="button" class="btn btn-danger">Fshi</a>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
+
         </div>
       </div>
     </div>

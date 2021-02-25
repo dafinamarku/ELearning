@@ -128,6 +128,18 @@
     <Compile Include="Migrations\202102030914087_KomentIdNull.designer.cs">
       <DependentUpon>202102030914087_KomentIdNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102071842119_KursNivelTipFK.cs" />
+    <Compile Include="Migrations\202102071842119_KursNivelTipFK.designer.cs">
+      <DependentUpon>202102071842119_KursNivelTipFK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102071844419_KursNivelTipFKNullable.cs" />
+    <Compile Include="Migrations\202102071844419_KursNivelTipFKNullable.designer.cs">
+      <DependentUpon>202102071844419_KursNivelTipFKNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102231133521_MaterialValidationConstraints.cs" />
+    <Compile Include="Migrations\202102231133521_MaterialValidationConstraints.designer.cs">
+      <DependentUpon>202102231133521_MaterialValidationConstraints.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProjectDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,6 +190,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102030914087_KomentIdNull.resx">
       <DependentUpon>202102030914087_KomentIdNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102071842119_KursNivelTipFK.resx">
+      <DependentUpon>202102071842119_KursNivelTipFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102071844419_KursNivelTipFKNullable.resx">
+      <DependentUpon>202102071844419_KursNivelTipFKNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102231133521_MaterialValidationConstraints.resx">
+      <DependentUpon>202102231133521_MaterialValidationConstraints.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

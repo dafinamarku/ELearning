@@ -1,0 +1,43 @@
+﻿@model E_learning.DomainModels.Nivel
+@{
+    ViewBag.Title = "AddLevelInCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <br />
+  @Html.Partial("_Notifications")
+  <h2 class="text-center">Shto nje nivel ne kursin @ViewBag.Course</h2>
+  <hr />
+  <br />
+  @{ SelectList list = (SelectList)ViewBag.AvaliableLevels;}
+
+  @if (list == null || list.Count() == 0)
+  {
+    <p class="text-center text-info">
+      Nuk ka asnje nivel te disponueshem per tu shtuar per kursin @ViewBag.Course
+      <br /><b><a href="/Course/CourseLevels/@ViewBag.CourseId">Kthehu tek kursi</a></b>
+    </p>
+  }
+  else
+  {
+    using (Html.BeginForm("AddLevelInCourse", "Level", new { @courseId = ViewBag.CourseId }, FormMethod.Post, null))
+    {
+      <div class="row">
+        <div class="col" style=" left: 35%; transform: translateX(-35 %)">
+          <label class="text-center font-weight-bold">Nivelet e disponueshme</label>
+          @Html.DropDownListFor(x=>x.Id,(SelectList)ViewBag.AvaliableLevels,
+              "Zgjidhni nje nivel ---", htmlAttributes: new { @class = "form-control", style = "width: 300px;" })
+          <br />
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-light btn-outline-dark">Shto</button> &nbsp;&nbsp;
+        <a href="/Course/CourseLevels/@ViewBag.CourseId" class="btn btn-secondary">Anulo</a>
+      </div>
+    }
+  }
+
+
+</div>
+

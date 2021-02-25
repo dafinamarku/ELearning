@@ -16,5 +16,6 @@ namespace E_learning.ServiceInterface
     List<InstructorViewModel> GetAllInstructors();
     string GetUserRole(string uid);
     bool AddOrRemoveCourseFromMyFavorites(int courseId, string uid);
+    bool DeleteUser(string uid);
   }
 }

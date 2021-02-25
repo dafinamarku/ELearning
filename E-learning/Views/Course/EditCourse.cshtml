@@ -1,0 +1,40 @@
+﻿@model E_learning.DomainModels.Kurs
+@{
+    ViewBag.Title = "EditCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <br />
+  <h2>Edito Kursin</h2>
+  <hr />
+  <br />
+  @using (Html.BeginForm("EditCourse", "Course", FormMethod.Post, new { enctype = "multipart/form-data" }))
+  {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.KursId)
+    @Html.HiddenFor(x=>x.InstruktoriId)
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        @Html.LabelFor(x => x.Emri)
+        @Html.TextBoxFor(x => x.Emri, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Emri, null, new { @class = "text-danger" })
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label>Foto</label>
+        <input type="file" class="form-control file-input" id="file" name="file" value="@Model.Photo">
+        <small class="form-text text-muted">Nqs ju nuk perzgjidhni nje foto atehere fotoja ekzistuese nuk do te ndryshoje.</small>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Ruaj" class="btn  btn-warning text-white" /> &nbsp; &nbsp;
+        @Html.ActionLink("Anulo", "AllCourses", "Course", new { @search = string.Empty }, new { @class = "btn btn-primary" })
+      </div>
+    </div>
+  }
+</div>
+

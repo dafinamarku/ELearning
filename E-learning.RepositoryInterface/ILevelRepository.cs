@@ -10,5 +10,7 @@ namespace E_learning.RepositoryInterface
   public interface ILevelRepository
   {
     Nivel GetLevelById(int id);
+    List<Nivel> GetCourseLevels(int courseId);
+    List<Nivel> GetAvailableLevelsForCourse(int courseId);
   }
 }

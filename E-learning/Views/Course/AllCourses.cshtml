@@ -1,58 +1,122 @@
 ﻿@using E_learning.DomainModels
 @model IEnumerable<E_learning.DomainModels.Kurs>
 @{
-    ViewBag.Title = "AllCourses";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "AllCourses";
+  Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
   <br />
   @Html.Partial("_Notifications")
-  <h2>Kurset</h2>
-  <hr />
+  @using (Html.BeginForm("AllCourses", "Course", FormMethod.Get))
+  {
+  <div class="form-inline">
+    <input type="text" name="search" id="search" placeholder="Emri i kursit..." class="form-control" /> &nbsp; &nbsp;
+    <button type="submit" class="btn btn-dark">Kerko</button>
+  </div>
+  }
   <br />
+  @if (ViewBag.Search != null)
+  {
+    <div class="text-info" style="font-size:large">
+      Ju kerkuat per <b>@ViewBag.Search</b>
+    </div>
+    <br />
+  }
+  <h2 class="float-left">Kurset</h2>
   @if (User.IsInRole("Student"))
   {
     <div class="float-right">
-  <a href="/Course/MyFavoriteCourses" class="btn btn-warning text-white">Kurset e preferuara <i class="fas fa-star"></i></a>
-    </div> <br /><br />
+      <a href="/Course/MyFavoriteCourses" class="btn btn-warning text-white">Kurset e preferuara <i class="fas fa-star"></i></a>
+    </div> <br />
   }
+  else
+  {
+    if (User.IsInRole("Admin"))
+    {
+      <div class="float-right">
+        <a href="/Course/CreateCourse" class="btn btn-success">Krijo Kurs</a>
+      </div> <br />
+    }
+  }
+  <br />
+  <hr />
+  <br />
+
   <div class="row">
     @foreach (var course in Model)
     {
-     
-    <div class="card" style="box-shadow: 10px 10px 5px #aaaaaa; margin-bottom:50px; margin-right:30px">
-      @if (Request.IsAuthenticated && User.IsInRole("Student"))
-      {
-        ApplicationUser currentUser = (ApplicationUser)ViewBag.CurrentUser;
-      <ul class="list-group list-group-flush">
-        @if (User.IsInRole("Student"))
+
+      <div class="card" style="box-shadow: 10px 10px 5px #aaaaaa; margin-bottom:50px; margin-right:30px">
+        @if (Request.IsAuthenticated)
         {
-          if (currentUser.KursetEPreferuara.Where(x=>x.KursId==course.KursId).Count()==1)
-          {
-            <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Hiq nga kurset e preferuara">
-              <a href="/Course/AddOrRemoveCourseFromMyFavorites/@course.KursId" class="text-decoration-none text-warning float-right"><i class="fas fa-star fa-2x"></i></a>
-            </li>
-          }
-          else
-          {
-            <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Shto tek kurset e preferuara">
-              <a href="/Course/AddOrRemoveCourseFromMyFavorites/@course.KursId" class="text-decoration-none text-warning float-right"><i class="far fa-star fa-2x"></i></a>
-            </li>
-          }
+          ApplicationUser currentUser = (ApplicationUser)ViewBag.CurrentUser;
+          <ul class="list-group list-group-flush">
+            @if (User.IsInRole("Student"))
+            {
+              if (currentUser.KursetEPreferuara.Where(x => x.KursId == course.KursId).Count() == 1)
+              {
+                <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Hiq nga kurset e preferuara">
+                  <a href="/Course/AddOrRemoveCourseFromMyFavorites/@course.KursId" class="text-decoration-none text-warning float-right"><i class="fas fa-star fa-2x"></i></a>
+                </li>
+              }
+              else
+              {
+                <li class="list-group-item" data-toggle="tooltip" data-placement="top" title="Shto tek kurset e preferuara">
+                  <a href="/Course/AddOrRemoveCourseFromMyFavorites/@course.KursId" class="text-decoration-none text-warning float-right"><i class="far fa-star fa-2x"></i></a>
+                </li>
+              }
+            }
+            else
+            {
+              if (User.IsInRole("Admin"))
+              {
+                <li class="list-group-item">
+                  <a href="" title="Fshi Kursin" data-toggle="modal" data-target="#deleteCourseModal" onclick="addLinkTo('/Course/DeleteCourse/@course.KursId','fshiKursLink')" class="text-decoration-none float-right" style="margin-left:20px"><i class="far fa-trash-alt fa-lg"></i></a>
+                  <a href="/Course/EditCourse/@course.KursId" title="Edito Kursin" class="text-decoration-none float-right"><i class="far fa-edit fa-lg"></i></a>
+                </li>}
+            }
+          </ul>
         }
-      </ul>
-      }
-      <div class="col-md-4 float-left">
-        <img src="@MaterialPaths.CoursePhotoPath@course.Photo" style="width: 300px; height:200px" />
-        <a href="/Course/CourseLevels/@course.KursId" class="text-decoration-none">
-          <h3 class="text-dark">@course.Emri</h3>
-        </a>
+        <div class="col-md-4 float-left">
+          <img src="@MaterialPaths.CoursePhotoPath@course.Photo" style="width: 300px; height:200px" />
+          <a href="/Course/CourseLevels/@course.KursId" class="text-decoration-none">
+            <h3 class="text-dark">@course.Emri</h3>
+          </a>
+        </div>
+
+
       </div>
 
-
-    </div>
-      
     }
   </div>
+</div>
+<!-- Delete Course Modal -->
+<div class="modal fade" id="deleteCourseModal" tabindex="-1" role="dialog" aria-labelledby="deleteCourseModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Jeni te sigurt per fshirjen e kursit?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Me fshirjen e ketij kursi do te fshihen edhe cdo nivel, tip apo materail i tij.
+        Instruktori i kursit(nqs ka) do te hiqet nga drejtimi i ketij kursi.
+      </div>
+      <div class="modal-footer">
+        <form method="post" id="fshiKursLink" action="">
+          <button type="submit" class="btn btn-danger">Fshi</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
+
+      </div>
+    </div>
   </div>
+</div>
+<script>
+  function addLinkTo(link, id) {
+    document.getElementById(id).action = link;
+  }
+</script>
 

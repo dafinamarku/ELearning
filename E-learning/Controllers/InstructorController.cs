@@ -96,5 +96,20 @@ namespace E_learning.Controllers
           }
           return RedirectToAction("AllInstructors");
         }
+
+        [HttpPost]
+        public ActionResult DeleteInstructor(string id)//id e instruktorit
+        {
+          string userRole = userService.GetUserRole(id);
+          if (userRole != "Instruktor")
+            return new HttpNotFoundResult();
+          //me fshirjen e instruktorit kursi qe ai drejton(nqs ka) do te mbetet pa drejtues
+          courseService.RemoveInstructorFromCourse(id);
+          if (userService.DeleteUser(id))
+            this.AddNotification("Instruktori u fshi", NotificationType.SUCCESS);
+          else
+            this.AddNotification("Instruktori nuk u fshi", NotificationType.ERROR);
+          return RedirectToAction("AllInstructors");
+        }
     }
 }

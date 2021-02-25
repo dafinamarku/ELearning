@@ -18,27 +18,30 @@
     @Html.HiddenFor(x => x.SeksioniId)
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         @Html.LabelFor(x => x.Titulli, htmlAttributes: new { @class = "control-label col-md-2" })
-        @Html.TextBoxFor(x => x.Titulli, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(x => x.Titulli, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(x => x.Titulli, null, new { @class = "text-danger" })
       </div>
-      <div class="form-group col-md-6">
-        <input type="file" class="file-input" id="file" name="file" value="@Model.Filename">
+      </div>
+      <div class="form-row">
+      <div class="form-group col-md-4">
+        <label class="control-label">Dokumenti</label>
+        <input type="file" class="file-input form-control" id="file" name="file" value="@Model.Filename">
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         @Html.LabelFor(x => x.Pershkrimi, htmlAttributes: new { @class = "control-label col-md-2" })
-        @Html.TextAreaFor(x => x.Pershkrimi, new { htmlAttributes = new { @class = "form-control" } })
+        <textarea class="form-control" rows="3" id="Pershkrimi" name="Pershkrimi">@Model.Pershkrimi</textarea>
         @Html.ValidationMessageFor(x => x.Pershkrimi, null, new { @class = "text-danger" })
       </div>
     </div>
 
     <div class="form-group">
       <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Ruaj" class="btn  btn-warning text-white" /> &nbsp; &nbsp;
-        @Html.ActionLink("Anullo", "MaterialsOfSection", "Material", new { id = Model.SeksioniId }, new { @class = "btn btn-primary" })
+        <input type="submit" value="Ruaj" class="btn  btn-success text-white" /> &nbsp; &nbsp;
+        @Html.ActionLink("Anulo", "MaterialsOfSection", "Material", new { id = Model.SeksioniId }, new { @class = "btn btn-secondary" })
       </div>
     </div>
   }

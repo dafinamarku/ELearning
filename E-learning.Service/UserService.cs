@@ -50,6 +50,9 @@ namespace E_learning.Service
       return repository.AddOrRemoveCourseFromMyFavorites(courseId, uid);
     }
 
-
+    public bool DeleteUser(string uid)
+    {
+      return repository.DeleteUser(uid);
+    }
   }
 }

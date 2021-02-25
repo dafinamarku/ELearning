@@ -24,7 +24,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label>Materiali</label>
-        <input class="form-control" type="file" class="file-input" id="file" name="file" value="@Model.Filename">
+        <input  type="file" class="form-control file-input" id="file" name="file" value="@Model.Filename">
         <small class="form-text text-muted">Nqs ju nuk perzgjidhni nje file atehere file ekzistues nuk do te ndryshoje.</small>
       </div>
     </div>
@@ -39,7 +39,7 @@
     <div class="row">
       <div class="col-md-offset-2 col-md-10">
         <input type="submit" value="Ruaj" class="btn  btn-warning text-white" /> &nbsp; &nbsp;
-        @Html.ActionLink("Anullo", "MaterialsOfSection", "Material", new { id = Model.SeksioniId }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Anulo", "MaterialsOfSection", "Material", new { id = Model.SeksioniId }, new { @class = "btn btn-primary" })
       </div>
     </div>
   }

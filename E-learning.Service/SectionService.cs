@@ -22,5 +22,25 @@ namespace E_learning.Repository
     {
       return sectionRepository.GetSectionById(id);
     }
+
+    public bool AddLevelInSection(int sectionId, int levelId)
+    {
+      return sectionRepository.AddLevelInSection(sectionId, levelId);
+    }
+
+    public void CreateSection(KursNivelTip newSection)
+    {
+      sectionRepository.CreateSection(newSection);
+    }
+
+    public bool DeleteSection(int courseId, int levelId, int? typeId)
+    {
+      return sectionRepository.DeleteSection(courseId, levelId, typeId);
+    }
+
+    public bool AddTypeInCourseLevel(int courseId, int levelId, int typeId)
+    {
+      return sectionRepository.AddTypeInCourseLevel(courseId, levelId, typeId);
+    }
   }
 }
